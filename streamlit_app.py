@@ -168,9 +168,8 @@ def create_dashboard(df):
         return
     
     # Main charts - First Row
-    col1 = st.columns(1)
-    
-    with col1:
+    # FIXED: Use st.container() instead of st.columns(1) for full-width content
+    with st.container():
         st.markdown('<h3 class="section-header">🏭 Energy Generation Mix Over Time</h3>', unsafe_allow_html=True)
         
         # Select only numeric columns for resampling and use sum instead of mean for energy
@@ -193,7 +192,6 @@ def create_dashboard(df):
             hovermode='x unified'
         )
         st.plotly_chart(fig, use_container_width=True)
-    
     
     # Second Row
     col1, col2 = st.columns(2)
