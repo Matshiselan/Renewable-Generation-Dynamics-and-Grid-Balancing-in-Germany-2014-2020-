@@ -87,7 +87,7 @@ def create_dashboard(df):
     selected_years = st.sidebar.multiselect(
         "Select Years for Comparison",
         years,
-        default=[2019, 2020]
+        default=[2014, 2015, 2016, 2017, 2018, 2019, 2020]
     )
     
     # KPI Section
