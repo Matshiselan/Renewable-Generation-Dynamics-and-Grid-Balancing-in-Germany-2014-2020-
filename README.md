@@ -77,4 +77,29 @@ To forecast renewable generation (combined solar and wind), a **Long Short-Term 
 The model successfully captured temporal dependencies and seasonal dynamics, producing realistic short-term renewable generation forecasts.
 
 
+### 📊 3. Streamlit Dashboard
+
+The Germany Energy Intelligence Dashboard is an interactive web application that provides comprehensive analysis and visualization of Germany's energy sector from 2014 to 2020. Built with Streamlit and Plotly, this dashboard offers insights into renewable energy generation, capacity growth, and grid performance metrics.
+
+**Key Performance Indicators (KPIs)**
+* Renewable Energy Share: Percentage of solar and wind in total energy mix
+* Capacity Utilization: Solar and wind generation efficiency
+* Offshore Wind Contribution: Share of offshore wind in total wind capacity
+* Load Forecast Accuracy: Grid management performance metrics
+
+**Interactive Visualizations**
+* Energy Generation Mix: Time-series analysis of solar, wind, and total load
+* Capacity vs Generation: Real-time utilization profiles
+* Wind Generation Breakdown: Onshore vs offshore wind analysis
+* Renewable Capacity Growth: Year-over-year capacity expansion trends
+* Seasonal Patterns: Monthly generation and load patterns
+* Capacity Factor Analysis: Technology efficiency comparisons
+
+**Data Insights**
+* Renewable Growth Trends: Tracking Germany's energy transition
+* Seasonal Performance: Understanding generation patterns
+* Grid Stability: Assessing forecast accuracy and reliability
+
+
+Streamlit Dashboard can be found in this URL Link: [Link](https://kwdeq2kxhg9b282r53sq3w.streamlit.app/)
 
