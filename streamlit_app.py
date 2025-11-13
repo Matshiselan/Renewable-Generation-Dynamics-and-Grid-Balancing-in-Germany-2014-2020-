@@ -168,7 +168,7 @@ def create_dashboard(df):
         return
     
     # Main charts - First Row
-    col1, col2 = st.columns(2)
+    col1 = st.columns(1)
     
     with col1:
         st.markdown('<h3 class="section-header">🏭 Energy Generation Mix Over Time</h3>', unsafe_allow_html=True)
@@ -194,67 +194,6 @@ def create_dashboard(df):
         )
         st.plotly_chart(fig, use_container_width=True)
     
-    with col2:
-        st.markdown('<h3 class="section-header">📈 Capacity Utilization</h3>', unsafe_allow_html=True)
-        
-        if len(filtered_df) > 0:
-            latest_data = filtered_df.iloc[-1]
-            
-            # Calculate utilization percentages
-            solar_utilization = (latest_data['DE_solar_generation_actual'] / latest_data['DE_solar_capacity'] * 100) if latest_data['DE_solar_capacity'] > 0 else 0
-            wind_utilization = (latest_data['DE_wind_generation_actual'] / latest_data['DE_wind_capacity'] * 100) if latest_data['DE_wind_capacity'] > 0 else 0
-            
-            # Create bar chart
-            fig = go.Figure()
-            
-            fig.add_trace(go.Bar(
-                name='Solar',
-                x=['Solar'],
-                y=[solar_utilization],
-                marker_color='#FFD700',
-                text=[f'{solar_utilization:.1f}%'],
-                textposition='auto',
-                hovertemplate='<b>Solar</b><br>Utilization: %{y:.1f}%<br>Generation: %{customdata[0]:,.0f} MW<br>Capacity: %{customdata[1]:,.0f} MW<extra></extra>',
-                customdata=[[latest_data['DE_solar_generation_actual'], latest_data['DE_solar_capacity']]]
-            ))
-            
-            fig.add_trace(go.Bar(
-                name='Wind',
-                x=['Wind'],
-                y=[wind_utilization],
-                marker_color='#87CEEB',
-                text=[f'{wind_utilization:.1f}%'],
-                textposition='auto',
-                hovertemplate='<b>Wind</b><br>Utilization: %{y:.1f}%<br>Generation: %{customdata[0]:,.0f} MW<br>Capacity: %{customdata[1]:,.0f} MW<extra></extra>',
-                customdata=[[latest_data['DE_wind_generation_actual'], latest_data['DE_wind_capacity']]]
-            ))
-            
-            fig.update_layout(
-                height=400,
-                yaxis_title="Capacity Utilization (%)",
-                yaxis_range=[0, 100],
-                showlegend=False
-            )
-            
-            st.plotly_chart(fig, use_container_width=True)
-            
-            # Display actual numbers
-            col1, col2 = st.columns(2)
-            with col1:
-                st.metric(
-                    label="Solar Utilization",
-                    value=f"{solar_utilization:.1f}%",
-                    delta=f"{latest_data['DE_solar_generation_actual']:,.0f} / {latest_data['DE_solar_capacity']:,.0f} MW"
-                )
-            with col2:
-                st.metric(
-                    label="Wind Utilization",
-                    value=f"{wind_utilization:.1f}%",
-                    delta=f"{latest_data['DE_wind_generation_actual']:,.0f} / {latest_data['DE_wind_capacity']:,.0f} MW"
-                )
-            
-        else:
-            st.warning("No data available for the selected date range")
     
     # Second Row
     col1, col2 = st.columns(2)
