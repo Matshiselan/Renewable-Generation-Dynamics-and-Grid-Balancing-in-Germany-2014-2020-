@@ -1,11 +1,18 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import datetime
 from datetime import datetime as dt
+
+# Try to import plotly with fallback
+try:
+    import plotly.express as px
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
+    PLOTLY_AVAILABLE = True
+except ImportError:
+    PLOTLY_AVAILABLE = False
+    st.error("Plotly is not installed. Please install it using: pip install plotly")
 
 # Page configuration
 st.set_page_config(
@@ -40,10 +47,6 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-
-# Load data
-df = pd.read_csv("data/time_series_15min_singleindex.csv", parse_dates=["utc_timestamp"])
-df = df.sort_values("utc_timestamp")
 
 def create_dashboard(df):
     # Convert timestamp and ensure proper sorting
@@ -93,7 +96,6 @@ def create_dashboard(df):
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        # Safe calculation with error handling
         try:
             avg_renewable_share = (filtered_df['DE_solar_generation_actual'].mean() + 
                                  filtered_df['DE_wind_generation_actual'].mean()) / filtered_df['DE_load_actual_entsoe_transparency'].mean() * 100
@@ -158,13 +160,20 @@ def create_dashboard(df):
                 delta="Data unavailable"
             )
     
+    if not PLOTLY_AVAILABLE:
+        st.warning("""
+        **Plotly charts are disabled** - Plotly is not installed. 
+        Please install plotly to enable interactive charts: `pip install plotly`
+        """)
+        return
+    
     # Main charts - First Row
     col1, col2 = st.columns(2)
     
     with col1:
         st.markdown('<h3 class="section-header">🏭 Energy Generation Mix Over Time</h3>', unsafe_allow_html=True)
         
-        # FIXED: Select only numeric columns for resampling and use sum instead of mean for energy
+        # Select only numeric columns for resampling and use sum instead of mean for energy
         numeric_columns = ['DE_solar_generation_actual', 'DE_wind_generation_actual', 'DE_load_actual_entsoe_transparency']
         daily_df = filtered_df[['utc_timestamp'] + numeric_columns].resample('D', on='utc_timestamp').sum().reset_index()
         
@@ -222,7 +231,7 @@ def create_dashboard(df):
     with col1:
         st.markdown('<h3 class="section-header">🌬️ Wind Generation Breakdown</h3>', unsafe_allow_html=True)
         
-        # FIXED: Use the filtered_df for yearly analysis if years are selected
+        # Use the filtered_df for yearly analysis if years are selected
         if selected_years:
             analysis_df = df[df['year'].isin(selected_years)]
         else:
@@ -360,9 +369,17 @@ def create_dashboard(df):
         High forecast accuracy indicates robust grid management capabilities.
         """)
 
-# Run the dashboard
+# Main execution
 try:
+    # Load data
+    df = pd.read_csv("data/time_series_15min_singleindex.csv", parse_dates=["utc_timestamp"])
+    df = df.sort_values("utc_timestamp")
+    
+    # Run the dashboard
     create_dashboard(df)
+    
+except FileNotFoundError:
+    st.error("Data file not found. Please ensure 'data/time_series_15min_singleindex.csv' exists.")
 except Exception as e:
     st.error(f"An error occurred: {str(e)}")
     st.info("Please check your data file and ensure all required columns are present.")
