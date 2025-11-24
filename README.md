@@ -107,7 +107,7 @@ Streamlit Dashboard can be found in this URL Link: [Link](https://kwdeq2kxhg9b28
 ---
 ## 📁 4. Project Structure
 The project is organized as follows:
-
+```
 .
 ├── data
 │   └── time_series_15min_singleindex.csv
