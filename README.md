@@ -76,8 +76,9 @@ To forecast renewable generation (combined solar and wind), a **Long Short-Term 
 
 The model successfully captured temporal dependencies and seasonal dynamics, producing realistic short-term renewable generation forecasts.
 
+---
 
-### 📊 3. Streamlit Dashboard
+## 📊 3. Streamlit Dashboard
 
 The Germany Energy Intelligence Dashboard is an interactive web application that provides comprehensive analysis and visualization of Germany's energy sector from 2014 to 2020. Built with Streamlit and Plotly, this dashboard offers insights into renewable energy generation, capacity growth, and grid performance metrics.
 
@@ -103,3 +104,16 @@ The Germany Energy Intelligence Dashboard is an interactive web application that
 
 Streamlit Dashboard can be found in this URL Link: [Link](https://kwdeq2kxhg9b282r53sq3w.streamlit.app/)
 
+---
+## 📁 4. Project Structure
+The project is organized as follows:
+
+.
+├── data
+│   └── time_series_15min_singleindex.csv
+├── notebooks
+│   ├── german_electricity_eda_notebook.ipynb
+│   └── german_electricity_forecasting.ipynb
+├── README.md
+├── requirements.txt
+└── streamlit_app.py
