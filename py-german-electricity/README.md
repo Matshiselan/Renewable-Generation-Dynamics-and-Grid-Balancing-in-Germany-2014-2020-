@@ -19,7 +19,7 @@ The goal is to understand renewable generation dynamics (solar and wind), their 
 
 ---
 
-## 🛩 Data Description
+## 🧩 Data Description
 
 | Variable                                     | Description                             |
 | -------------------------------------------- | --------------------------------------- |
@@ -98,3 +98,46 @@ The Germany Energy Intelligence Dashboard is an interactive web application that
 
 **Data Insights**
 * Renewable Growth Trends: Tracking Germany's energy transition
+* Seasonal Performance: Understanding generation patterns
+* Grid Stability: Assessing forecast accuracy and reliability
+
+
+Streamlit Dashboard can be found in this URL Link: [Link](https://kwdeq2kxhg9b282r53sq3w.streamlit.app/)
+
+---
+## 📁 4. Project Structure
+The project is organized as follows:
+```
+.
+└── py-german-electricity
+    ├── CHANGELOG        
+    │   └── v0.1.0.md     
+    ├── CODE_OF_CONDUCT.md
+    ├── CONTRIBUTING.md   
+    ├── data
+    │   └── time_series_15min_singleindex.csv
+    ├── docs
+    │   ├── api.md
+    │   ├── index.md
+    │   ├── installation.md
+    │   └── usage.md
+    ├── justfile
+    ├── LICENSE
+    ├── notebooks
+    │   ├── german_electricity_eda_notebook.ipynb
+    │   └── german_electricity_forecasting.ipynb
+    ├── pyproject.toml
+    ├── README.md
+    ├── requirements.txt
+    ├── SECURITY.md
+    ├── src
+    │   ├── py_german_electricity
+    │   │   ├── cli.py
+    │   │   ├── py.typed
+    │   │   ├── utils.py
+    │   │   ├── __init__.py
+    │   │   └── __main__.py
+    │   └── streamlit_app.py
+    ├── tests
+    │   └── test_py_german_electricity.py
+    └── zensical.toml
